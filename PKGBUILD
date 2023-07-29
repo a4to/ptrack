@@ -22,7 +22,8 @@ package() {
   cd "$srcdir/${pkgname}-${pkgver}-${pkgrel}-${arch}" ||
   cd "$srcdir/${pkgname}"
 
-  python3 ./setup.py install --root="$pkgdir" --optimize=1
+  python3 ./setup.py install --root="$pkgdir" --prefix=/usr --optimize=1
+
   install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
   install -Dm644 README.md "${pkgdir}/usr/share/doc/${pkgname}/README.md"
 
