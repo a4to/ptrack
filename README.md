@@ -20,7 +20,7 @@
 
 ## Installation:
 
-### **`ptrack`** is available from various package managers:
+### **ptrack** can easily be installed from various platforms:
 
 ### **PyPI**:
     pip install ptrack
@@ -29,13 +29,16 @@
     conda install -c concise ptrack
 
 ### **Arch User Repository (AUR)**:
-#### ptrack is available from the AUR for Arch Linux users, or any other Arch based distro with the help of your favorite AUR helper, eg:
+#### For Arch Linux users, ptrack is available from on the AUR for all Arch or Arch based distro with the help of your favorite AUR helper, eg:
     yay -Sy ptrack
 
 ### **From Source**:
 #### If you prefer to install from source, clone this repo, cd into it and run:
     pip install -e .
+
     # or python3 ./setup.py install
+
+
 
 # Usage
 
@@ -60,14 +63,14 @@ Refer to the User Guide for more detailed instructions and use-cases.
 + -V, --version: Show version number and exit.
 
 
-![Verbose Copy](./.gitlab/media/vcopy.gif)
-
-
 ![Regular Copy](./.gitlab/media/copy.gif)
 
 
+![Verbose Copy](./.gitlab/media/vcopy.gif)
+
+
 ## License
-`ptrack` is licenced under the MIT/X Consortium license
+ptrack is open source and licenced under the MIT/X Consortium license
 
 ## Support
 If you encounter any problems or have suggestions for ptrack, please open an issue on GitLab. We value your feedback and will respond as quickly as possible.
