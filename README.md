@@ -9,3 +9,12 @@
       -c, --copy     copy files (You can use `ptc` instead of `ptrack -c`)
       -m, --move     move files (You can use `ptm` instead of `ptrack -m`)
 
+
+
+![Welcome to P-Track](./.gitlab/media/welcome.gif)
+
+![Verbose Copy](./.gitlab/media/vcopy.gif)
+
+![Regular Copy](./.gitlab/media/copy.gif)
+
+
