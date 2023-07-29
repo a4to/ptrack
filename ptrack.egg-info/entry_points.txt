@@ -1,0 +1,4 @@
+[console_scripts]
+ptc = ptrack.main:copy
+ptm = ptrack.main:move
+ptrack = ptrack.main:main

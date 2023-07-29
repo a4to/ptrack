@@ -1,6 +1,6 @@
 package:
   name: ptrack
-  version: 0.1.2
+  version: 0.1.4
 
 source:
   path: ..
