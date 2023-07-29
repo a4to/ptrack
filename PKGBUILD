@@ -4,10 +4,16 @@ pkgname=ptrack
 pkgver=0.1.0
 pkgrel=1
 pkgdesc="A simple CLI utility for asthetically tracking progress when copying or moving files"
-arch=(any)
+arch=(x86_64)
 url="https://gitlab.com/a4to/${pkgname}"
 license=('MIT')
-depends=('python3 python-argparse python-rich python-argcomplete python-setuptools')
+depends=(
+  "python3"
+  "python-argparse"
+  "python-rich"
+  "python-argcomplete"
+  "python-setuptools"
+)
 source=("git+$url.git")
 sha256sums=('SKIP')
 
