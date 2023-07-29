@@ -1,12 +1,10 @@
 # P-Track - Progress Tracker
 
-![Welcome to P-Track](./.gitlab/media/main.gif)
-
-
-**Welcome to ptrack, a powerful and user-friendly command line interface (CLI) utility built to transform the way you handle file operations. Whether you're copying or moving files, ptrack provides a real-time, beautifully formatted progress bar alongside key statistics about your ongoing operation. As an incredibly efficient and performance-optimized tool, ptrack works swiftly, ensuring your file operations are completed accurately and quickly.**
+## Welcome to ptrack, a powerful and user-friendly command line interface (CLI) utility built to transform the way you handle file operations. Whether you're copying or moving files, ptrack provides a real-time, beautifully formatted progress bar alongside key statistics about your ongoing operation. As an incredibly efficient and performance-optimized tool, ptrack works swiftly, ensuring your file operations are completed accurately and quickly.**
 
 *Version: 0.1.4*
 
+![Welcome to P-Track](./.gitlab/media/main.gif)
 
 ## Key Features
 
@@ -17,21 +15,24 @@
 + High Performance: Above all, ptrack stands out for its speed and accuracy. It ensures your file operations are executed swiftly and with a high degree of precision.
 
 
-## Installation
+## Installation:
 
-**`ptrack` can be installed through a variety of methods:**
+### **`ptrack`** is available from various package managers:
 
-### `PyPI`:
+### **PyPI**:
     pip install ptrack
 
-### `Conda`:
+### **Conda**:
     conda install -c concise ptrack
 
-### `Arch User Repository (AUR)`:
-    If you're an Arch Linux user, you can install ptrack from the AUR using an AUR helper like yay or paru: yay -S ptrack
+### **Arch User Repository (AUR)**:
+#### ptrack is available from the AUR for Arch Linux users, or any other Arch based distro with the help of your favorite AUR helper, eg:
+    yay -Sy ptrack
 
-### `From Source`:
-    Clone this repository and run pip install -e . or python3 ./setup.py install
+### **From Source**:
+#### If you prefer to install from source, clone this repo, cd into it and run:
+    pip install -e .
+    # or python3 ./setup.py install
 
 # Usage
 
