@@ -34,8 +34,8 @@ def regular_copy(src, dst, console, task, progress):
         with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
             while True:
                 buf = fsrc.read(1024*1024)
-                if operation_cancelled:
-                    return "c"
+                if not buf or operation_cancelled:
+                    break
                 fdst.write(buf)
                 progress.update(task, advance=len(buf))
                 progress.refresh()
@@ -69,8 +69,8 @@ def verbose_copy(src, dst, console, current, total_files):
             with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
                 while not progress.finished:
                     buf = fsrc.read(1024*1024)
-                    if operation_cancelled:
-                        return "c"
+                    if not buf or operation_cancelled:
+                        break
                     fdst.write(buf)
                     progress.update(task, advance=len(buf))
                     progress.refresh()
