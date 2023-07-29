@@ -2,30 +2,52 @@ import os
 from rich.progress import Progress, BarColumn, TextColumn, TimeRemainingColumn, FileSizeColumn
 
 
+def getTotalSize(srcPaths):
+    total_size = 0
+    for path in srcPaths:
+        if os.path.isfile(path):
+            total_size += os.path.getsize(path)
+        else:
+            for r, d, files in os.walk(path):
+                for f in files:
+                    fp = os.path.join(r, f)
+                    total_size += os.path.getsize(fp)
+    return total_size
+
+
 def format_file_size(file_size):
-    if file_size >= 1024 * 1024 * 1024:
-        return f"{file_size / (1024*1024*1024):.2f} GB"
-    elif file_size >= 1024 * 1024:
-        return f"{file_size / (1024*1024):.2f} MB"
-    elif file_size >= 1024:
-        return f"{file_size / 1024:.2f} kB"
-    else:
+    if file_size >= 1000 ** 4:  # Terabyte
+        return f"{round(file_size / (1000 ** 4))} TB"
+    elif file_size >= 1000 ** 3:  # Gigabyte
+        return f"{round(file_size / (1000 ** 3))} GB"
+    elif file_size >= 1000 ** 2:  # Megabyte
+        return f"{round(file_size / (1000 ** 2))} MB"
+    elif file_size >= 1000:  # Kilobyte
+        return f"{round(file_size / 1000)} kB"
+    else:  # Byte
         return f"{file_size} bytes"
 
 
 def regular_copy(src, dst, console, task, progress):
-    with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
-        while True:
-            buf = fsrc.read(1024*1024)
-            if not buf:
-                break
-            fdst.write(buf)
-            progress.update(task, advance=len(buf))
-            progress.refresh()
+    operation_cancelled = False
+    try:
+        with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
+            while True:
+                buf = fsrc.read(1024*1024)
+                if operation_cancelled:
+                    return "c"
+                fdst.write(buf)
+                progress.update(task, advance=len(buf))
+                progress.refresh()
+
+    except KeyboardInterrupt:
+        operation_cancelled = True
+        progress.stop()
+        return "c"
 
 
 def verbose_copy(src, dst, console, current, total_files):
-
+    operation_cancelled = False
     file_size = os.path.getsize(src)
 
     with Progress(
@@ -43,14 +65,19 @@ def verbose_copy(src, dst, console, current, total_files):
     ) as progress:
         task = progress.add_task("", total=file_size, file_size=format_file_size(file_size))
 
-        with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
-            while not progress.finished:
-                buf = fsrc.read(1024*1024)
-                if not buf:
-                    break
-                fdst.write(buf)
-                progress.update(task, advance=len(buf))
-                progress.refresh()
+        try:
+            with open(src, 'rb') as fsrc, open(dst, 'wb') as fdst:
+                while not progress.finished:
+                    buf = fsrc.read(1024*1024)
+                    if operation_cancelled:
+                        return "c"
+                    fdst.write(buf)
+                    progress.update(task, advance=len(buf))
+                    progress.refresh()
+        except KeyboardInterrupt:
+            operation_cancelled = True
+            progress.stop()
+            return "c"
 
 
 def hlp():

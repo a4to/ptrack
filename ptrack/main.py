@@ -1,7 +1,7 @@
 import os
 import sys
 import ptrack
-from ptrack.methods import format_file_size, regular_copy, verbose_copy, hlp
+from ptrack.methods import format_file_size, regular_copy, verbose_copy, hlp, getTotalSize
 from rich.progress import Progress, BarColumn, TextColumn, TimeRemainingColumn, FileSizeColumn
 from rich.console import Console
 import shutil
@@ -39,7 +39,8 @@ def run(process):
         new_name = os.path.basename(dst)
 
     total_files = sum(len(files) for path in srcPaths for r, d, files in os.walk(path) if os.path.isdir(path)) + sum(1 for path in srcPaths if os.path.isfile(path))
-    total_size = sum(os.path.getsize(os.path.join(r, f)) for path in srcPaths for r, d, files in os.walk(path) for f in files) + sum(os.path.getsize(path) for path in srcPaths if os.path.isfile(path))
+    total_size = getTotalSize(srcPaths)
+
     current_file = 1
 
     if total_files > 1:
@@ -53,8 +54,11 @@ def run(process):
         for src_path in srcPaths:
             if os.path.isfile(src_path):
                 dst_path = os.path.join(dst_dir, os.path.basename(src_path) if not new_name else new_name)
-                verbose_copy(src_path, dst_path, console, current_file, total_files)
+                terminate = verbose_copy(src_path, dst_path, console, current_file, total_files)
                 current_file += 1
+                if terminate == 'c':
+                    console.print("\n[bold red]\[-][/bold red][bold white] Operation cancelled by user.[/bold white]\n")
+                    sys.exit(1)
             else:
                 for root, dirs, files in os.walk(src_path):
                     for file in files:
@@ -62,8 +66,11 @@ def run(process):
                         relative_path = os.path.relpath(src_file_path, start=src_path)
                         dst_file_path = os.path.join(dst_dir, os.path.basename(src_path) if not new_name else new_name, relative_path)
                         os.makedirs(os.path.dirname(dst_file_path), exist_ok=True)
-                        verbose_copy(src_file_path, dst_file_path, console, current_file, total_files)
+                        terminate = verbose_copy(src_file_path, dst_file_path, console, current_file, total_files)
                         current_file += 1
+                        if terminate == 'c':
+                            console.print("\n[bold red]\[-][/bold red][bold white] Operation cancelled by user.[/bold white]\n")
+                            sys.exit(1)
     else:
         with Progress(
             BarColumn(bar_width=50),
@@ -82,7 +89,10 @@ def run(process):
             for src_path in srcPaths:
                 if os.path.isfile(src_path):
                     dst_file_path = os.path.join(dst_dir, os.path.basename(src_path) if not new_name else new_name)
-                    regular_copy(src_path, dst_file_path, console, task, progress)
+                    terminate = regular_copy(src_path, dst_file_path, console, task, progress)
+                    if terminate == 'c':
+                        console.print("\n[bold red]\[-][/bold red][bold white] Operation cancelled by user.[/bold white]\n")
+                        sys.exit(1)
                 else:
                     for root, dirs, files in os.walk(src_path):
                         for file in files:
@@ -90,7 +100,10 @@ def run(process):
                             relative_path = os.path.relpath(src_file_path, start=src_path)
                             dst_file_path = os.path.join(dst_dir, os.path.basename(src_path) if not new_name else new_name, relative_path)
                             os.makedirs(os.path.dirname(dst_file_path), exist_ok=True)
-                            regular_copy(src_file_path, dst_file_path, console, task, progress)
+                            terminate = regular_copy(src_file_path, dst_file_path, console, task, progress)
+                            if terminate == 'c':
+                                console.print("\n[bold red]\[-][/bold red][bold white] Operation cancelled by user.[/bold white]\n")
+                                sys.exit(1)
 
     return srcPaths
 

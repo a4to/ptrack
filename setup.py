@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ptrack',
-    version='0.1.0',
+    version='0.1.2',
     description='A simple CLI utility for asthetically tracking progress when copying or moving files.',
     author='Connor Etherington',
     author_email='connor@concise.cc',

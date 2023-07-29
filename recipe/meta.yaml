@@ -1,0 +1,29 @@
+package:
+  name: ptrack
+  version: 0.1.2
+
+source:
+  path: ..
+
+build:
+  number: 0
+  script: '{{ PYTHON }} -m pip install . --no-deps -vv'
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - "numpy<=1.24"
+    - pandas
+
+about:
+  home: https://gitlab.com/a4to/ptrack
+  license: MIT
+  license_file: LICENSE
+  summary: 'A simple CLI utility for aesthetically tracking progress when copying or moving files'
+
+extra:
+  recipe-maintainers:
+    - concise

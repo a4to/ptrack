@@ -1,7 +1,7 @@
 # Maintainer: Connor Etherington <connor@concise.cc>
 # ---
 pkgname=ptrack
-pkgver=0.1.0
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="A simple CLI utility for asthetically tracking progress when copying or moving files"
 arch=(x86_64)
