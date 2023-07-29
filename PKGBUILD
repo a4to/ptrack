@@ -14,8 +14,18 @@ depends=(
   "python-argcomplete"
   "python-setuptools"
 )
-source=("git+$url.git")
-sha256sums=('SKIP')
+source=(
+  "https://concise.cc/pkg/${pkgname}-${pkgver}-${pkgrel}-$arch.pkg.tar.xz"
+)
+sha512sums=(
+  '3edef5c3f81b94aa9e3f1212213a649efa61c44d7fad1bd681f7a6c0c4e68da728aae69f9ebcd6190cf5523a16770ba39cf4e861457ecd73308f7dc24978ed2b'
+)
+md5sums=(
+  'cc292dd3872afe31fcf7e4d495b67b6b'
+)
+validpgpkeys=(
+  '81BACEEBC3EA26E127166E4A819BB92A9A48160E'
+)
 
 package() {
 
