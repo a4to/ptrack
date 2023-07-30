@@ -1,7 +1,7 @@
 # P-Track - Progress Tracker
 
-### **Welcome to ptrack, a powerful and user-friendly command line interface (CLI) utility built to transform the way you handle file operations. Whether you're copying or moving files, ptrack provides a real-time, beautifully formatted progress bar alongside key statistics about your ongoing operation.**
-### **As an incredibly efficient and performance-optimized tool, ptrack works swiftly, ensuring your file operations are completed accurately and quickly.**
+### Welcome to ptrack, a powerful and user-friendly command line interface (CLI) utility built to transform the way you handle file operations. Whether you're copying or moving files, ptrack provides a real-time, beautifully formatted progress bar alongside key statistics about your ongoing operation.
+### As an incredibly efficient and performance-optimized tool, ptrack works swiftly, ensuring your file operations are completed accurately and quickly.
 
 *Version: 0.1.4*
 
